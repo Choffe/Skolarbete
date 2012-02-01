@@ -83,6 +83,7 @@ public class UserLoginPane extends BasicPane {
 		public void actionPerformed(ActionEvent e) {
 			String userId = fields[USER_ID].getText();
 			/* --- insert own code here --- */
+			CurrentUser.instance().loginAs(userId);
 		}
 	}
 }
