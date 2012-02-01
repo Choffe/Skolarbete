@@ -173,6 +173,7 @@ public class Database {
 	public boolean makeReservation(Performance p){
 	
 		String sql = "select bookedSeats from performance where moviename = ? and showdate= ?";
+		String sql2 = "update performance set bookedSeats = bookedSeats + 1 where moviename = ? and showdate = ?;";
 		PreparedStatement ps = null;
 		try {
 			conn.setAutoCommit(false);
@@ -181,10 +182,13 @@ public class Database {
 			ps.setString(2, p.getShowdate());
 			ResultSet rs = ps.executeQuery();
 			rs.next();
-			if(rs.getInt("bookedSeats") >0){
-				ps = conn.prepareStatement("update performance set bookedSeats = bookedSeats -1" +
-											"where moviename = " + p.getMovieName()+ " and "+
-											" showdate = "+ p.getShowdate());
+			if(rs.getInt("bookedSeats") >=0){
+				//ps = conn.prepareStatement("update performance set bookedSeats = bookedSeats +1" +
+				//							"where moviename = " + p.getMovieName()+ " and "+
+				//							"showdate = "+ p.getShowdate());
+				ps = conn.prepareStatement(sql2);
+				ps.setString(1, p.getMovieName());
+				ps.setString(2, p.getShowdate());
 				if(ps.executeUpdate() != 1){
 					conn.rollback();
 					return false;
