@@ -128,13 +128,14 @@ public class Database {
 			}
 		}
 		return result;
-		
 	}
 	
 	//Haha refaktorisera lite eller???
 	public Performance getPerformance(String movieName, String showdate){
 		String sql = "select * from performance where moviename = ? and showdate= ?";
+		String sql2 = "select * from theater where name = ?";
 		PreparedStatement ps = null;
+		PreparedStatement ps2 = null;
 		Performance performance = new Performance();
 		try {
 			ps = conn.prepareStatement(sql);
@@ -149,12 +150,19 @@ public class Database {
 			performance.setTheaterName(rs.getString("theatername"));
 			
 			
+			ps2 = conn.prepareStatement(sql2);
+			ps2.setString(1, rs.getString("theatername"));
+			ResultSet rs2 = ps2.executeQuery();
+			rs2.next();
+			performance.setTotalSeats(rs2.getInt("nbrOfSeats"));
+			
 		} catch (SQLException e) {
 			e.printStackTrace();
 			return null;
 		}finally{
 			try {
 				ps.close();
+				ps2.close();
 			} catch (SQLException e) {
 				e.printStackTrace();
 			}

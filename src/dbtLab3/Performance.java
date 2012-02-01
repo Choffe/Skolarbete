@@ -7,6 +7,8 @@ public class Performance {
 	private String showdate;
 	private int bookedSeats;
 	private String theaterName;
+	private int nbrOfSeats;
+	
 	public String getMovieName() {
 		return movieName;
 	}
@@ -37,8 +39,10 @@ public class Performance {
 	public void setTheaterName(String theaterName) {
 		this.theaterName = theaterName;
 	}
-	
-
-
-
+	public void setTotalSeats(int nbrOfSeats) {
+		this.nbrOfSeats = nbrOfSeats;	
+	}
+	public int getTotalSeats(){
+		return nbrOfSeats;
+	}
 }
