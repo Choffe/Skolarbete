@@ -183,9 +183,6 @@ public class Database {
 			ResultSet rs = ps.executeQuery();
 			rs.next();
 			if(rs.getInt("bookedSeats") >=0){
-				//ps = conn.prepareStatement("update performance set bookedSeats = bookedSeats +1" +
-				//							"where moviename = " + p.getMovieName()+ " and "+
-				//							"showdate = "+ p.getShowdate());
 				ps = conn.prepareStatement(sql2);
 				ps.setString(1, p.getMovieName());
 				ps.setString(2, p.getShowdate());
@@ -193,8 +190,6 @@ public class Database {
 					conn.rollback();
 					return false;
 				}
-				
-//				ps = conn.prepareStatement("insert into reservationmakesfor );
 			}else{
 				conn.rollback();
 				return false;
