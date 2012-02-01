@@ -132,6 +132,7 @@ public class Database {
 	}
 	
 	//Haha refaktorisera lite eller???
+	//Skit samma! Ingen refaktoriseringstänk nu. C-arna läser den här kursen tidigt
 	public Performance getPerformance(String movieName, String showdate){
 		String sql = "select * from performance where moviename = ? and showdate= ?";
 		PreparedStatement ps = null;
