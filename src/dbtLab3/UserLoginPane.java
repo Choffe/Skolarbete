@@ -84,6 +84,7 @@ public class UserLoginPane extends BasicPane {
 			String userId = fields[USER_ID].getText();
 			/* --- insert own code here --- */
 			CurrentUser.instance().loginAs(userId);
+			displayMessage("Logged in as " + userId);
 		}
 	}
 }

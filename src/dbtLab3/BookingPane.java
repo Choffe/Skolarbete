@@ -283,9 +283,13 @@ public class BookingPane extends BasicPane {
 			String date = (String) dateList.getSelectedValue();
 			/* --- insert own code here --- */
 			Performance p = db.getPerformance(movieName, date);
-			db.makeReservation(p);
+			boolean result = db.makeReservation(p);
 			Performance pUpdated = db.getPerformance(movieName, date);
 			fields[FREE_SEATS].setText((pUpdated.getTotalSeats() - pUpdated.getBookedSeats())+"");
+			if(result)
+				displayMessage("1 ticket booked for " + movieName);
+			else
+				displayMessage("Error!");
 		}
 	}
 }
